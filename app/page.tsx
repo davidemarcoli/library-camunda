@@ -1,7 +1,7 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {Book} from "@prisma/client";
+import {Book} from "@/prisma/generated/client";
 
 export default function Home() {
 
