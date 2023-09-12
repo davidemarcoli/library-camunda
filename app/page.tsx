@@ -23,6 +23,7 @@ export default function Home() {
         const formData = new FormData(event.currentTarget)
         const title = formData.get('title') as string
         const description = formData.get('description') as string
+        setBooks([...books, {id: 0, title, content: description} as Book]);
         fetch('/books', {
             method: 'POST',
             headers: {
@@ -41,6 +42,7 @@ export default function Home() {
 
     async function deleteBook(id: number) {
         console.log('delete book', id);
+        setBooks(books.filter(book => book.id !== id));
         fetch('/books/' + id, {
             method: 'DELETE',
         }).then(async value => {
