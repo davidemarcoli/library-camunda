@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {Book} from "@/prisma/generated/client";
 
 export default function Home() {
@@ -18,14 +18,31 @@ export default function Home() {
         return books;
     }
 
-    async function addNewBook() {
-        console.log('add new book');
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        const formData = new FormData(event.currentTarget)
+        const title = formData.get('title') as string
+        const description = formData.get('description') as string
         fetch('/books', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({title: 'The Hobbit', content: 'In a hole in the ground there lived a hobbit.'}),
+            body: JSON.stringify({title, content: description}),
+        }).then(async value => {
+            console.log('value', await value.json());
+            setBooks(await getBooks());
+        }).catch(reason => {
+            console.log('reason', reason);
+        });
+        // clear form
+        event.currentTarget.reset()
+    }
+
+    async function deleteBook(id: number) {
+        console.log('delete book', id);
+        fetch('/books/' + id, {
+            method: 'DELETE',
         }).then(async value => {
             console.log('value', await value.json());
             setBooks(await getBooks());
@@ -37,13 +54,18 @@ export default function Home() {
 
     return (
         <>
-            <button onClick={addNewBook} className={'border border-gray-300 p-4 my-4'}>
-                Add new book
-            </button>
+            <form onSubmit={onSubmit} className={'border border-gray-300 p-4 my-4'}>
+                <input type="text" name="title" className={'mr-4 text-white bg-black dark:bg-white dark:text-black mb-4'}/>
+                <input type="text" name="description" className={'mr-4 text-white bg-black dark:bg-white dark:text-black'}/>
+                <button type="submit" className={'border border-gray-300 p-4 my-4'}>Add new book</button>
+            </form>
             {books.map((book) => (
-                <div key={book.id} className={'border border-gray-300 p-4 my-4'}>
+                <div key={book.id} className={'border border-gray-300 p-4 my-4'} /*onDoubleClick={() => deleteBook(book.id)}*/>
                     <h2>{book.title}</h2>
                     <p>{book.content}</p>
+                    <button onClick={() => deleteBook(book.id)} className={'border border-gray-300 p-4 my-4'}>
+                        Delete book
+                    </button>
                 </div>
             ))}
         </>

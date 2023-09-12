@@ -3,9 +3,7 @@ import {NextRequest, NextResponse} from "next/server";
 
 const prisma = new PrismaClient()
 
-export async function POST(
-    req: NextRequest,
-) {
+export async function POST(req: NextRequest) {
     const { title, content } = await req.json();
     console.log("title: ", title, "content: ", content)
     const newBook = await prisma.book.create({
