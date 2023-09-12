@@ -38,4 +38,16 @@ pnpm dev
 bun dev
 ```
 
+If you want to see the database, run:
+
+```bash
+npx prisma studio
+# or
+yarn prisma studio
+# or
+pnpx prisma studio
+# or
+bun x prisma studio
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

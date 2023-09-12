@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 
-import { PrismaClient } from "@/prisma/generated/client";
-const prisma = new PrismaClient()
+import { prisma } from "@/prisma/prisma";
 
 export async function DELETE(req: NextRequest, context: { params: { id: number } }) {
     const id  = +context.params.id;
