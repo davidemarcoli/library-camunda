@@ -1,0 +1,4 @@
+Sitemap: https://library-camunda.davidemarcoli.dev/sitemap.xml
+
+User-agent: *
+Disallow: /api
