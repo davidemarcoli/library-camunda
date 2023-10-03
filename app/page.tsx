@@ -1,9 +1,9 @@
 "use client";
 
-import {useEffect, useState} from "react";
-import {Book} from "@prisma/client";
-import {Button} from "@/components/ui/button";
-import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import { Book } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
 
@@ -27,7 +27,7 @@ export default function Home() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({title: 'The Hobbit', content: 'In a hole in the ground there lived a hobbit.'}),
+            body: JSON.stringify({ title: 'The Hobbit', content: 'In a hole in the ground there lived a hobbit.' }),
         }).then(async value => {
             console.log('value', await value.json());
             setBooks(await getBooks());

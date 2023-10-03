@@ -1,9 +1,9 @@
-import {signIn} from "next-auth/react";
-import React, {useCallback, useMemo, useState,} from "react";
-import {Github, Google, LoadingDots} from "@/components/shared/icons";
+import { signIn } from "next-auth/react";
+import React, { useCallback, useMemo, useState, } from "react";
+import { Github, Google, LoadingDots } from "@/components/shared/icons";
 
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog";
-import {Button} from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 const SignInModal = () => {
     const [signInClicked, setSignInClicked] = useState(false);
@@ -66,7 +66,7 @@ export function useSignInModal() {
     }, []);
 
     return useMemo(
-        () => ({setShowSignInModal, SignInModal: SignInModalCallback}),
+        () => ({ setShowSignInModal, SignInModal: SignInModalCallback }),
         [setShowSignInModal, SignInModalCallback],
     );
 }

@@ -1,10 +1,10 @@
 import "./globals.css";
 import Nav from "@/components/layout/nav";
 import React from "react";
-import {ThemeProvider} from "@/components/theme-provider";
-import {inter, sfPro} from "@/app/fonts";
-import {cx} from "class-variance-authority";
-import {Toaster} from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/theme-provider";
+import { inter, sfPro } from "@/app/fonts";
+import { cx } from "class-variance-authority";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
     title: "Library Camunda",
