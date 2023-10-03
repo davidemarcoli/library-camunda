@@ -23,6 +23,10 @@ const Header = ({ session }: { session: Session | null }) => {
         //     href: "quiz/list",
         //     label: "Quiz List",
         // },
+        {
+            href: "",
+            label: "Home"
+        }
     ];
 
     return (

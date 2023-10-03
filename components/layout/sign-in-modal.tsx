@@ -63,7 +63,7 @@ export function useSignInModal() {
 
     const SignInModalCallback = useCallback(() => {
         return <SignInModal/>;
-    }, [showSignInModal, setShowSignInModal]);
+    }, []);
 
     return useMemo(
         () => ({setShowSignInModal, SignInModal: SignInModalCallback}),
