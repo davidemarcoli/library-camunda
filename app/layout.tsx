@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { inter, sfPro } from "@/app/fonts";
 import { cx } from "class-variance-authority";
 import { Toaster } from "@/components/ui/toaster";
+import { CommandMenu } from "@/components/command-menu";
 
 export const metadata = {
     title: "Library Camunda",
@@ -37,6 +38,7 @@ export default async function RootLayout({
                 {/*</Suspense>*/}
                 <main className={"mx-4 mt-16"}>{children}</main>
                 <Toaster/>
+                <CommandMenu/>
             </ThemeProvider>
             </body>
             </html>

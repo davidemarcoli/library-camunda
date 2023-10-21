@@ -15,17 +15,13 @@ const Header = ({ session }: { session: Session | null }) => {
     const scrolled = useScroll(50);
     const { SignInModal, setShowSignInModal } = useSignInModal();
     const routes = [
-        // {
-        //     href: "quiz/create",
-        //     label: "Create Quiz",
-        // },
-        // {
-        //     href: "quiz/list",
-        //     label: "Quiz List",
-        // },
         {
             href: "",
             label: "Home"
+        },
+        {
+            href: "start-process",
+            label: "Start Process",
         }
     ];
 

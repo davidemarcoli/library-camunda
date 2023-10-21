@@ -20,3 +20,8 @@ export async function GET() {
     const books = await prisma.book.findMany();
     return NextResponse.json(books)
 }
+
+export async function DELETE() {
+    const books = await prisma.book.deleteMany();
+    return NextResponse.json(books)
+}
