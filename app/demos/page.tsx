@@ -1,7 +1,7 @@
 "use client";
 
 import {Button} from "@/components/ui/button";
-import { Session } from "next-auth";
+import {Session} from "next-auth";
 import {useEffect, useState} from "react";
 import {getSession} from "next-auth/react";
 
@@ -9,6 +9,7 @@ export default function StartProcessPage() {
 
     const [processId, setProcessId] = useState<string>("");
     const [taskId, setTaskId] = useState<string>("");
+    const [tasksOfUser, setTasksOfUser] = useState<any[] | undefined>(undefined);
     const [session, setSession] = useState<Session | null>(null);
 
     useEffect(() => {
@@ -42,7 +43,8 @@ export default function StartProcessPage() {
             }
         }).then(response => response.json()).then(data => {
             console.log(data);
-            //setProcessId('');
+            setProcessId('');
+            setTaskId('')
         }).catch(error => {
             console.error(error);
         });
@@ -83,6 +85,7 @@ export default function StartProcessPage() {
             }
         }).then(response => response.json()).then(data => {
             console.log("Tasks of user", data);
+            setTasksOfUser(data)
         }).catch(error => {
             console.error(error);
         });
@@ -116,6 +119,21 @@ export default function StartProcessPage() {
                         </Button>
                     </>
                 )}
+                {
+                    tasksOfUser && (
+                        <div className="pt-4">
+                            <h2 className="text-2xl">User Tasks</h2>
+                            <ul>
+                                {tasksOfUser.map((task, index) => (
+                                    <>
+                                        {/* Assuming task is a string or number; if it's an object, you need to specify which property you're rendering */}
+                                        <li>{task.id}</li>
+                                    </>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
             </main>
         </div>
     )

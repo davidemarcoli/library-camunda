@@ -14,9 +14,7 @@ export async function POST(req: NextRequest, {params}: { params: { id: string } 
             }
         });
         console.log("Response", response)
-        const data = await response.json();
-        console.log("Data", data)
-        return NextResponse.json(data);
+        return NextResponse.json({});
     } catch (error) {
         console.log("Error", error)
         return NextResponse.error();
