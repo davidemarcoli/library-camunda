@@ -20,8 +20,8 @@ const Header = ({ session }: { session: Session | null }) => {
             label: "Home"
         },
         {
-            href: "start-process",
-            label: "Start Process",
+            href: "demos",
+            label: "Demos",
         }
     ];
 
