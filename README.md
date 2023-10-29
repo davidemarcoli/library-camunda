@@ -1,53 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Create T3 App
 
-## Getting Started
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-First, prepare the database:
+## What's next? How do I make an app with this?
 
-```bash
-npx prisma db push
-# or
-yarn prisma db push
-# or
-pnpx prisma db push
-# or
-bun x prisma db push
-```
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-Then, generate the Prisma client:
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-```bash
-npx prisma generate
-# or
-yarn prisma generate
-# or
-pnpx prisma generate
-# or
-bun x prisma generate
-```
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-Finally, run the development server:
+## Learn More
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-If you want to see the database, run:
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-```bash
-npx prisma studio
-# or
-yarn prisma studio
-# or
-pnpx prisma studio
-# or
-bun x prisma studio
-```
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How do I deploy this?
+
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
