@@ -8,7 +8,7 @@ export default function StartProcessPage() {
 
     const [processId, setProcessId] = useState<string>("");
     const [taskId, setTaskId] = useState<string>("");
-    const [tasksOfUser, setTasksOfUser] = useState<any[] | undefined>(undefined);
+    const [tasksOfUser, setTasksOfUser] = useState<any[]>([]);
 
     const startProcessMutation = api.camunda.startProcess.useMutation();
     const completeTaskMutation = api.camunda.completeTask.useMutation();
@@ -72,7 +72,7 @@ export default function StartProcessPage() {
               <Button onClick={() => completeTask()}>Complete Task</Button>
             </>
           )}
-          {tasksOfUser?.length && (
+          {tasksOfUser.length > 0 && (
             <div className={"pt-4"}>
               <h2 className={"text-2xl"}>User Tasks</h2>
               <ul>
