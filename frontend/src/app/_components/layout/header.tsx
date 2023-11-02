@@ -28,8 +28,8 @@ const Header = ({ session }: { session: Session | null }) => {
             label: "List",
         },
         {
-            href: "demos",
-            label: "Demos",
+            href: "my-library",
+            label: "My Library",
         }
     ];
 
