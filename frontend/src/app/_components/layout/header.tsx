@@ -19,10 +19,10 @@ const Header = ({ session }: { session: Session | null }) => {
     const { SignInModal, setShowSignInModal } = useSignInModal();
     const router = useRouter();
     const routes = [
-        {
-            href: "/",
-            label: "Home"
-        },
+        // {
+        //     href: "/",
+        //     label: "Home"
+        // },
         {
             href: "list",
             label: "List",
@@ -30,7 +30,11 @@ const Header = ({ session }: { session: Session | null }) => {
         {
             href: "my-library",
             label: "My Library",
-        }
+        },
+        {
+            href: "request-book",
+            label: "Request Book",
+        },
     ];
 
     const routeToSignIn = () => {

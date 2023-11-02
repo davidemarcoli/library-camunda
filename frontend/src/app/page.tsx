@@ -1,45 +1,16 @@
 "use client";
 
-import {api} from "~/trpc/react";
-import {type Book} from "@prisma/client";
-import {Button} from "~/app/_components/ui/button";
-import {Card, CardDescription, CardHeader, CardTitle} from "./_components/ui/card";
-export default function Home() {
-    const allBooksQuery = api.book.getAll.useQuery();
-    const createBookMutation = api.book.create.useMutation({
-        onSuccess: () => void allBooksQuery.refetch()
-    });
-    const deleteBookMutation = api.book.delete.useMutation({
-        onSuccess: () =>  void allBooksQuery.refetch()
-    });
-
-    const handleCreateBook = () => {
-        const title = 'The Hobbit';
-        const content = 'In a hole in the ground there lived a hobbit.';
-        createBookMutation.mutate({title, content});
-    }
-
-    const handleDeleteBook = (id: number) => {
-        deleteBookMutation.mutate({id});
-    }
+export default function Welcome() {
 
     return (
-        <>
-            <Button onClick={handleCreateBook} className={'p-4 my-4'}>
-                Add new book
-            </Button>
-            {allBooksQuery.data?.map((book: Book) => (
-                // <div key={book.id} className={'border border-gray-300 p-4 my-4'}>
-                //     <h2>{book.title}</h2>
-                //     <p>{book.content}</p>
-                // </div>
-                <Card key={book.id} className={'p-4 my-4'} onDoubleClick={() => handleDeleteBook(book.id)}>
-                    <CardHeader>
-                        <CardTitle>{book.title}</CardTitle>
-                        <CardDescription>{book.content}</CardDescription>
-                    </CardHeader>
-                </Card>
-            ))}
-        </>
+        <div className={'flex flex-col justify-center items-center'}>
+            <h1 className={'mt-4 text-4xl font-bold'}>Welcome to the <span
+                className={'text-blue-500'}>Dalama</span> Library</h1>
+            <div className={'mt-4 text-xl flex flex-col justify-center'}>
+                Here you can borrow books from the library.<br/>
+                There are many books to choose from.<br/>
+                For kids, for adults, for everyone.
+            </div>
+        </div>
     );
 }
