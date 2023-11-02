@@ -26,13 +26,17 @@ public class ExampleRestEndpoint {
     @PutMapping("/start")
     public ResponseEntity<String> startProcess(ServerWebExchange exchange) throws ApiException {
         // TODO: Get from REST request / URL parameter
-        String someProcessVariable = "admin";
+        String userProcessVariable = "admin";
+        int bookProcessVariable = 1;
 
         // prepare variables to pass on to process
         Map<String, VariableValueDto> variables = new HashMap<>();
         variables.put(
                 ProcessConstants.VAR_NAME_USER,
-                new VariableValueDto().value(someProcessVariable).type("string"));
+                new VariableValueDto().value(userProcessVariable).type("string"));
+        variables.put(
+                ProcessConstants.VAR_NAME_BOOK,
+                new VariableValueDto().value(bookProcessVariable).type("string"));
 
         // start process instance
         ProcessInstanceWithVariablesDto processInstance = processDefinitionApi.startProcessInstanceByKey(

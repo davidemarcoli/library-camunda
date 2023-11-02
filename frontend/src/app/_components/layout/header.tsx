@@ -10,20 +10,33 @@ import { useSignInModal } from "./sign-in-modal";
 import { ModeToggle } from "~/app/_components/mode-toggle";
 import Image from "next/image";
 import useScroll from "~/lib/hooks/use-scroll";
+import React from "react";
+import { useRouter } from "next/navigation";
+import {signIn} from "next-auth/react";
 
 const Header = ({ session }: { session: Session | null }) => {
     const scrolled = useScroll(50);
     const { SignInModal, setShowSignInModal } = useSignInModal();
+    const router = useRouter();
     const routes = [
         {
             href: "/",
             label: "Home"
         },
         {
+            href: "list",
+            label: "List",
+        },
+        {
             href: "demos",
             label: "Demos",
         }
     ];
+
+    const routeToSignIn = () => {
+        // router.push("/auth/signin");
+        signIn("credentials")
+    }
 
     return (
         <header className="sm:flex sm:justify-between">
@@ -72,7 +85,7 @@ const Header = ({ session }: { session: Session | null }) => {
                         ))}
                     </nav>
                     <div>
-                        {session ? <UserDropdown session={session} /> : <SignInModal />}
+                        {session ? <UserDropdown session={session} /> :  <Button variant="outline" onClick={routeToSignIn}>Sign In</Button>}
                     </div>
                     <ModeToggle />
                 </div>

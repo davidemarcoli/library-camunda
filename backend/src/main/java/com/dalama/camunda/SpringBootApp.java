@@ -11,6 +11,6 @@ public class SpringBootApp {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBootApp.class, args);
 
 //         For playing around it might be nice to just start a process right away
-         context.getBean(ExampleRestEndpoint.class).startProcess(null);
+//         context.getBean(ExampleRestEndpoint.class).startProcess(null);
     }
 }

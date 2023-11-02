@@ -19,13 +19,14 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
+export default async function RootLayout({
+                                           children,
+                                         }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+      <html lang="en" suppressHydrationWarning={true}>
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider headers={headers()}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -35,6 +36,6 @@ export default function RootLayout({
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
-    </html>
+      </html>
   );
 }

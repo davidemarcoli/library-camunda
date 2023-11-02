@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_00c35ik" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_00c35ik" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.16.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
   <bpmn:collaboration id="Collaboration_1ryuv5v">
     <bpmn:participant id="Participant_0obc1jj" name="Kunde" processRef="LB2_Library_Borrow_Book" />
   </bpmn:collaboration>
@@ -25,13 +25,13 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_02bmr2b</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1mmdgyg">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT2M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:userTask id="Activity_1eyhlbs" name="Send Mail">
+    <bpmn:serviceTask id="Activity_1eyhlbs" name="Send Mail" camunda:type="external" camunda:topic="send-reminder-mail">
       <bpmn:incoming>Flow_02bmr2b</bpmn:incoming>
       <bpmn:outgoing>Flow_1fxkwch</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ryuv5v">
@@ -51,7 +51,7 @@
       <bpmndi:BPMNShape id="Event_0292qta_di" bpmnElement="Event_0292qta">
         <dc:Bounds x="682" y="282" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_01dzdgg_di" bpmnElement="Activity_1eyhlbs">
+      <bpmndi:BPMNShape id="Activity_08gj950_di" bpmnElement="Activity_1eyhlbs">
         <dc:Bounds x="650" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1y8uqey_di" bpmnElement="Event_0thgvfx">
