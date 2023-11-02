@@ -84,14 +84,14 @@ export default function Home() {
                         <CardTitle>{book.title}</CardTitle>
                         <CardDescription>{book.content}</CardDescription>
                     </CardHeader>
-                    <CardFooter>
+                    {session && (<CardFooter>
                         {!isBookBorrowed(book.id) && (<Button variant={"outline"}
                                                               onClick={() => handleBorrowBook(book.id)}
                                                               className={'mr-2'}>Borrow</Button>)}
                         {isBookBorrowed(book.id) && isBorrowedBookFromCurrentUser(book.id) && (
                             <Button variant={"outline"}
                                     onClick={() => handleReturnBook(book.id)}>Return</Button>)}
-                    </CardFooter>
+                    </CardFooter>)}
                 </Card>
             ))}
         </>

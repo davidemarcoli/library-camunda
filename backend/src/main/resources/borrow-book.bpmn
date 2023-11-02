@@ -9,29 +9,26 @@
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_0jqzjzl" name="Buch zurückgeben">
       <bpmn:incoming>Flow_1ltsou1</bpmn:incoming>
-      <bpmn:incoming>Flow_1fxkwch</bpmn:incoming>
       <bpmn:outgoing>Flow_0dzacal</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="Event_0292qta">
       <bpmn:incoming>Flow_0dzacal</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1ltsou1" sourceRef="Event_0az9mqq" targetRef="Activity_0jqzjzl" />
-    <bpmn:sequenceFlow id="Flow_1fxkwch" sourceRef="Activity_1eyhlbs" targetRef="Activity_0jqzjzl" />
     <bpmn:sequenceFlow id="Flow_0dzacal" sourceRef="Activity_0jqzjzl" targetRef="Event_0292qta" />
     <bpmn:sequenceFlow id="Flow_02bmr2b" sourceRef="Event_0thgvfx" targetRef="Activity_1eyhlbs" />
-    <bpmn:boundaryEvent id="Event_0thgvfx" attachedToRef="Activity_0jqzjzl">
+    <bpmn:serviceTask id="Activity_1eyhlbs" name="Send Mail" camunda:type="external" camunda:topic="send-reminder-mail">
+      <bpmn:incoming>Flow_02bmr2b</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_0thgvfx" cancelActivity="false" attachedToRef="Activity_0jqzjzl">
       <bpmn:extensionElements>
         <camunda:failedJobRetryTimeCycle />
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_02bmr2b</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_1mmdgyg">
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0jg41nr">
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:serviceTask id="Activity_1eyhlbs" name="Send Mail" camunda:type="external" camunda:topic="send-reminder-mail">
-      <bpmn:incoming>Flow_02bmr2b</bpmn:incoming>
-      <bpmn:outgoing>Flow_1fxkwch</bpmn:outgoing>
-    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ryuv5v">
@@ -54,18 +51,12 @@
       <bpmndi:BPMNShape id="Activity_08gj950_di" bpmnElement="Activity_1eyhlbs">
         <dc:Bounds x="650" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1y8uqey_di" bpmnElement="Event_0thgvfx">
+      <bpmndi:BPMNShape id="Event_0ebchnx_di" bpmnElement="Event_0thgvfx">
         <dc:Bounds x="562" y="162" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_0xn70b9" bpmnElement="Flow_1ltsou1">
         <di:waypoint x="279" y="180" />
         <di:waypoint x="480" y="180" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1fxkwch_di" bpmnElement="Flow_1fxkwch">
-        <di:waypoint x="700" y="140" />
-        <di:waypoint x="700" y="110" />
-        <di:waypoint x="530" y="110" />
-        <di:waypoint x="530" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0dzacal_di" bpmnElement="Flow_0dzacal">
         <di:waypoint x="530" y="220" />

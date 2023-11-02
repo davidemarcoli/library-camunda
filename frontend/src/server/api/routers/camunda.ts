@@ -5,7 +5,7 @@ import {TRPCError} from "@trpc/server";
 import {asyncFilter} from "~/lib/utils";
 
 export const camundaRouter = createTRPCRouter({
-    startProcess: publicProcedure
+    startBorrowProcess: publicProcedure
         .input(z.object({bookId: z.number().min(1)}))
         .mutation(async ({ctx, input}) => {
             console.log(ctx.session)
@@ -37,6 +37,38 @@ export const camundaRouter = createTRPCRouter({
             }
         }),
 
+    startBookRequestProcess: publicProcedure
+        .input(z.object({title: z.string().min(1), content: z.string().min(1), author: z.string().min(1)}))
+        .mutation(async ({ctx, input}) => {
+            console.log(ctx.session)
+            try {
+                const response = await fetch(process.env.CAMUNDA_URL + `/process-definition/key/${process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST}/start`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        variables: {
+                            userId: {
+                                type: "String",
+                                value: ctx.session ? ctx.session.user.id : "Anonymous"
+                            },
+                            book: {
+                                type: "String",
+                                value: JSON.stringify(input)
+                            },
+                        }
+                    })
+                });
+                return (await response.json());
+            } catch (error) {
+                return new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Something went wrong',
+                });
+            }
+        }),
+
     completeTask: publicProcedure
         .input(z.object({id: z.string().min(1)}))
         .mutation(async ({input}) => {
@@ -52,6 +84,35 @@ export const camundaRouter = createTRPCRouter({
                 return new TRPCError({
                     code: 'INTERNAL_SERVER_ERROR',
                     message: 'Something went wrong',
+                });
+            }
+        }),
+
+    getTaskByBook: publicProcedure
+        .input(z.object({bookId: z.number().min(1)}))
+        .mutation(async ({input}) => {
+            try {
+                const response = await fetch(process.env.CAMUNDA_URL + `/task?processDefinitionKey=${process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BORROW}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    cache: "no-store"
+                });
+                let data = await response.json();
+                data = await Promise.all(data.map(async (task: any) => {
+                    task.variables = await getVariablesOfTask(task.id);
+                    return task;
+                }));
+                data = data.filter((task: any) => {
+                    return task.variables.bookId.value === input.bookId;
+                });
+                return data;
+            } catch (error) {
+                return new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Something went wrong',
+                    cause: error
                 });
             }
         }),

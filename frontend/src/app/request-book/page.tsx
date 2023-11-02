@@ -10,6 +10,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "~/app/_components/ui/input";
 import {Textarea} from "~/app/_components/ui/textarea";
+import {api} from "~/trpc/react";
 
 const formSchema = z.object({
     title: z.string(),
@@ -19,6 +20,8 @@ const formSchema = z.object({
 
 export default function RequestBooks() {
 
+    const requestBookMutation = api.camunda.startBookRequestProcess.useMutation();
+
     const [session, setSession] = useState<Session | undefined>(undefined);
 
     useEffect(() => {
@@ -26,7 +29,6 @@ export default function RequestBooks() {
             const session = await getSession();
             setSession(session || undefined);
         };
-
         fetchSession();
     }, []);
 
@@ -35,12 +37,17 @@ export default function RequestBooks() {
         defaultValues: {
             title: "",
             content: "",
-            author: "\t",
+            author: "",
         },
     });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
+        requestBookMutation.mutateAsync({
+            title: values.title,
+            content: values.content,
+            author: values.author,
+        }).then(r => console.log(r));
     }
 
     return (
@@ -87,7 +94,7 @@ export default function RequestBooks() {
                             <FormItem>
                                 <FormLabel>Author</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="..." {...field} />
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage/>
                             </FormItem>

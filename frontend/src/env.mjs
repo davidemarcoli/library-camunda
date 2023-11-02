@@ -33,6 +33,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: z.string(),
     CAMUNDA_URL: z.string().url(),
     CAMUNDA_PROCESS_DEFINITION_KEY_BORROW: z.string(),
+    CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST: z.string(),
   },
 
   /**
@@ -57,6 +58,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     CAMUNDA_URL: process.env.CAMUNDA_URL,
     CAMUNDA_PROCESS_DEFINITION_KEY_BORROW: process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BORROW,
+    CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST: process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
