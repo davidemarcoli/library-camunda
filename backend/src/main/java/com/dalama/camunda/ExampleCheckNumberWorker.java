@@ -27,7 +27,7 @@ public class ExampleCheckNumberWorker implements ExternalTaskHandler {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("davide@marcoli.ch");
-        message.setTo("davide@marcoli.ch");
+        message.setTo("davide@marcoli.ch", "orangesushi494@gmail.com");
         message.setSubject("TESTING");
         message.setText("DAS IST EIN TEST");
         emailSender.send(message);

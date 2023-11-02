@@ -39,6 +39,8 @@ public class ExampleRestEndpoint {
                 ProcessConstants.PROCESS_KEY,
                 new StartProcessInstanceDto().variables(variables));
 
+        System.out.println("Started process instance with id: " + processInstance.getId());
+
         // And just return something for the sake of the example
         return ResponseEntity
                 .status(HttpStatus.OK)
