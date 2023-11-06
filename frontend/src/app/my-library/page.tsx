@@ -70,7 +70,7 @@ export default function MyLibrary() {
                 // </div>
                 <Card key={book.id} className={'p-4 my-4'}>
                     <CardHeader>
-                        <CardTitle>{book.title}</CardTitle>
+                        <CardTitle>{book.title} <span className={'text-sm'}>by {book.author}</span></CardTitle>
                         <CardDescription>{book.content}</CardDescription>
                     </CardHeader>
                     <CardFooter>

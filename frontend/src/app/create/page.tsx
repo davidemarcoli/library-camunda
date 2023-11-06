@@ -16,7 +16,8 @@ export default function Home() {
     const handleCreateBook = () => {
         const title = 'The Hobbit';
         const content = 'In a hole in the ground there lived a hobbit.';
-        createBookMutation.mutate({title, content});
+        const author = 'J.R.R. Tolkien';
+        createBookMutation.mutate({title, content, author});
     }
 
     const handleDeleteBook = (id: number) => {

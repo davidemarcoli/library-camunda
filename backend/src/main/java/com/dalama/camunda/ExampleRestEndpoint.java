@@ -40,7 +40,7 @@ public class ExampleRestEndpoint {
 
         // start process instance
         ProcessInstanceWithVariablesDto processInstance = processDefinitionApi.startProcessInstanceByKey(
-                ProcessConstants.PROCESS_KEY,
+                ProcessConstants.PROCESS_KEY_BORROW_BOOK,
                 new StartProcessInstanceDto().variables(variables));
 
         System.out.println("Started process instance with id: " + processInstance.getId());

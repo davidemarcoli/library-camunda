@@ -26,7 +26,7 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_02bmr2b</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0jg41nr">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
   </bpmn:process>

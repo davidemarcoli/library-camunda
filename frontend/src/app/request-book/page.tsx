@@ -30,6 +30,7 @@ export default function RequestBooks() {
             const session = await getSession();
             setSession(session || undefined);
         };
+
         fetchSession();
     }, []);
 
@@ -60,6 +61,10 @@ export default function RequestBooks() {
             <h1 className={'mt-4 text-4xl font-bold'}>Request Book</h1>
 
             <div className={'mt-8 bg-red-400'}>
+
+                The user has the role {session?.user?.role}
+                and should see the {session?.user?.role === "user" ? "form" : "list of all book requests"}
+
                 <h1 className={'text-2xl font-bold'}>All Book Requests (TEMPORARY)</h1>
                 <ul>
                     {allBookRequests.data?.map((task: any) => {
