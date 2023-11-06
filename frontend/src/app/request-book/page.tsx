@@ -21,6 +21,7 @@ const formSchema = z.object({
 export default function RequestBooks() {
 
     const requestBookMutation = api.camunda.startBookRequestProcess.useMutation();
+    const allBookRequests = api.camunda.getAllBookRequestTasks.useQuery();
 
     const [session, setSession] = useState<Session | undefined>(undefined);
 
@@ -47,12 +48,29 @@ export default function RequestBooks() {
             title: values.title,
             content: values.content,
             author: values.author,
-        }).then(r => console.log(r));
+        }).then(r => {
+            console.log(r)
+            form.reset()
+            allBookRequests.refetch()
+        });
     }
 
     return (
         <div className={'flex flex-col items-center justify-center'}>
             <h1 className={'mt-4 text-4xl font-bold'}>Request Book</h1>
+
+            <div className={'mt-8 bg-red-400'}>
+                <h1 className={'text-2xl font-bold'}>All Book Requests (TEMPORARY)</h1>
+                <ul>
+                    {allBookRequests.data?.map((task: any) => {
+                        return (
+                            <li key={task.id}>
+                                <p>{JSON.parse(task.variables.book.value).title}</p>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
 
             <Form {...form}>
                 <form

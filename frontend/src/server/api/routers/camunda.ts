@@ -8,7 +8,6 @@ export const camundaRouter = createTRPCRouter({
     startBorrowProcess: publicProcedure
         .input(z.object({bookId: z.number().min(1)}))
         .mutation(async ({ctx, input}) => {
-            console.log(ctx.session)
             try {
                 const response = await fetch(process.env.CAMUNDA_URL + `/process-definition/key/${process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BORROW}/start`, {
                     method: 'POST',
@@ -40,7 +39,6 @@ export const camundaRouter = createTRPCRouter({
     startBookRequestProcess: publicProcedure
         .input(z.object({title: z.string().min(1), content: z.string().min(1), author: z.string().min(1)}))
         .mutation(async ({ctx, input}) => {
-            console.log(ctx.session)
             try {
                 const response = await fetch(process.env.CAMUNDA_URL + `/process-definition/key/${process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST}/start`, {
                     method: 'POST',
@@ -80,6 +78,30 @@ export const camundaRouter = createTRPCRouter({
                     }
                 });
                 return {};
+            } catch (error) {
+                return new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Something went wrong',
+                });
+            }
+        }),
+
+    getAllBookRequestTasks: publicProcedure
+        .query(async () => {
+            try {
+                const response = await fetch(process.env.CAMUNDA_URL + `/task?processDefinitionKey=${process.env.CAMUNDA_PROCESS_DEFINITION_KEY_BOOK_REQUEST}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    cache: "no-store"
+                });
+                let data = await response.json();
+                data = await Promise.all(data.map(async (task: any) => {
+                    task.variables = await getVariablesOfTask(task.id);
+                    return task;
+                }));
+                return data;
             } catch (error) {
                 return new TRPCError({
                     code: 'INTERNAL_SERVER_ERROR',
@@ -216,7 +238,7 @@ async function isTaskOfUser(taskId: string, userIdToCheck: string): Promise<bool
             // console.log("Variables", variables.user)
             //console.log("Variables Keys", Object.keys(variables))
             if (variables.user && variables.user.value === userIdToCheck) {
-                console.log(`Task ${taskId} is a "Lend Book" task for user ID: ${userIdToCheck}`);
+                //console.log(`Task ${taskId} is a "Lend Book" task for user ID: ${userIdToCheck}`);
                 return true;
             }
             return false;
