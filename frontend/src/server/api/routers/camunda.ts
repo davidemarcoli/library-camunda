@@ -86,6 +86,28 @@ export const camundaRouter = createTRPCRouter({
             }
         }),
 
+    completeTaskWithVariables: publicProcedure
+        .input(z.object({id: z.string().min(1), variables: z.object({}).passthrough()}))
+        .mutation(async ({input}) => {
+            try {
+                await fetch(process.env.CAMUNDA_URL + `/task/${input.id}/complete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        variables: input.variables
+                    })
+                });
+                return {};
+            } catch (error) {
+                return new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Something went wrong',
+                });
+            }
+        }),
+
     getAllBookRequestTasks: publicProcedure
         .query(async () => {
             try {
