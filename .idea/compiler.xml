@@ -10,11 +10,5 @@
         <module name="frontend" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="library-camunda (1)" target="18" />
-      <module name="library-camunda (2)" target="1.7" />
-      <module name="library-camunda-backend" target="18" />
-      <module name="library-camunda-frontend" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>

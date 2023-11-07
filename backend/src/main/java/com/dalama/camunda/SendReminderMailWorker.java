@@ -46,7 +46,7 @@ public class SendReminderMailWorker implements ExternalTaskHandler {
         }
 
         SimpleMailMessage message = getMailMessage(book);
-        emailSender.send(message);
+        //emailSender.send(message);
 
         // Complete the task
         externalTaskService.complete(externalTask);
