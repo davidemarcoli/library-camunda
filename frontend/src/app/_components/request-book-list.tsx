@@ -6,13 +6,15 @@ import {Button} from "~/app/_components/ui/button";
 
 export default function RequestBookList() {
     const allBookRequests = api.camunda.getAllBookRequestTasks.useQuery();
+    const completeWithVariablesMutation = api.camunda.completeTaskWithVariables.useMutation({
+        onSuccess: () => {
+            allBookRequests.refetch()
+        }
+    })
+    const createBookMutation = api.book.create.useMutation();
 
     function handleDecision(taskId: string, decision: boolean, book: any) {
-        api.camunda.completeTaskWithVariables.useMutation({
-            onSuccess: () => {
-                allBookRequests.refetch()
-            }
-        }).mutateAsync({
+        completeWithVariablesMutation.mutateAsync({
             id: taskId,
             variables: {
                 requestAccepted: {
@@ -23,7 +25,7 @@ export default function RequestBookList() {
         }).then(r => {
             console.log(r)
             if (decision) {
-                api.book.create.useMutation().mutateAsync({
+                createBookMutation.mutateAsync({
                     title: book.title,
                     content: book.content,
                     author: book.author,
@@ -35,8 +37,8 @@ export default function RequestBookList() {
     }
 
     return (
-        <div className={'mt-8 bg-red-400'}>
-            <h1 className={'text-2xl font-bold'}>All Book Requests (TEMPORARY)</h1>
+        <div className={'mt-8'}>
+            {!allBookRequests.data?.length && <p>No Book Requests</p>}
             <ul>
                 {allBookRequests.data?.map((task: any) => {
                     return {
@@ -46,7 +48,6 @@ export default function RequestBookList() {
                 }).map((data: any) => {
                     return (
                         <li key={data.task.id}>
-                            <p>{data.book.title}</p>
                             <Card>
                                 <CardHeader>
                                     <CardTitle>{data.book.title} <span
@@ -54,7 +55,7 @@ export default function RequestBookList() {
                                     <CardDescription>{data.book.content}</CardDescription>
                                 </CardHeader>
                                 <CardFooter>
-                                    <Button variant={"outline"}
+                                    <Button className={"mr-4"} variant={"outline"}
                                             onClick={() => handleDecision(data.task.id, true, data.book)}>Yes</Button>
                                     <Button variant={"outline"}
                                             onClick={() => handleDecision(data.task.id, false, data.book)}>No</Button>

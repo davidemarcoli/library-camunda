@@ -16,7 +16,7 @@ import {
 import * as React from "react";
 
 export default function UserDropdown({ session }: { session: Session }) {
-    const { email, image } = session?.user || {};
+    const { name, email, image } = session?.user || {};
     const [openPopover, setOpenPopover] = useState(false);
 
     return (
@@ -38,7 +38,7 @@ export default function UserDropdown({ session }: { session: Session }) {
                     </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>My Account ({name})</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => signOut()}>
                         {/*<Button onClick={() => signOut()}>*/}

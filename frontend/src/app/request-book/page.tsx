@@ -25,8 +25,8 @@ export default function RequestBooks() {
         <div className={'flex flex-col items-center justify-center'}>
             <h1 className={'mt-4 text-4xl font-bold'}>Request Book</h1>
 
-            The user has the role {session?.user?.role}
-            and should see the {session?.user?.role === "user" ? "form" : "list of all book requests"}
+            {/*The user has the role {session?.user?.role}*/}
+            {/*and should see the {session?.user?.role === "user" ? "form" : "list of all book requests"}*/}
 
 
             {session?.user.role == 'librarian' && <RequestBookList />}
